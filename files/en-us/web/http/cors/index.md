@@ -7,7 +7,11 @@ browser-compat: http.headers.Access-Control-Allow-Origin
 
 {{HTTPSidebar}}
 
-**Cross-Origin Resource Sharing** ({{Glossary("CORS")}}) is an {{Glossary("HTTP")}}-header based mechanism that allows a server to indicate any {{glossary("origin", "origins")}} (domain, scheme, or port) other than its own from which a browser should permit loading resources. CORS also relies on a mechanism by which browsers make a "preflight" request to the server hosting the cross-origin resource, in order to check that the server will permit the actual request. In that preflight, the browser sends headers that indicate the HTTP method and headers that will be used in the actual request.
+**Cross-Origin Resource Sharing** ({{Glossary("CORS")}}) is a protocol that lets a server use special {{Glossary("HTTP")}}-headers to indicate any {{glossary("origin", "origins")}} (domain, scheme, port) other than its own from which a browser may fetch the server's resources. For example, if Website A has a sufficiently permissive CORS policy, and a script on Website B running in a browser makes an appropriate HTTP request (called a "CORS request") for a resource from Website A, then Website A's server will send the resource as an HTTP response to the browser running Website B. 
+
+An advantage of CORS is that it allows a website to share its data with other, trustworthy, websites. A disadvantage of CORS is that, when used carelessly, it can cause data to be shared with untrustworthy websites. In the example above, CORS would allow Website B to fetch otherwise private content from Website A, possibly including user data. This may be okay if Website B is trustworthy, but otherwise, it could lead to a breach of Website A's private user data. Hence it is dangerous for Website A to have an overly permissive CORS policy. 
+
+A browser can check if a server is compatible with CORS by sending the server a "CORS-preflight" request, which is a special HTTP request whose headers indicate the HTTP methods and headers a future CORS request will use.
 
 An example of a cross-origin request: the front-end JavaScript code served from `https://domain-a.com` uses {{domxref("XMLHttpRequest")}} to make a request for `https://domain-b.com/data.json`.
 
